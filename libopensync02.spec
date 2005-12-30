@@ -1,9 +1,4 @@
 
-#
-# todo:
-# - python module opensync.so.0.0 is put to py_sitescriptdir instead of py_sitedir
-#
-
 Summary:	Data synchronization framework
 Name:		libopensync
 Version:	0.18
@@ -13,6 +8,7 @@ Group:		Libraries
 Source0:	http://www.opensync.org/attachment/wiki/download/%{name}-%{version}.tar.gz
 # Source0-md5:	ce94a69fb7ae7533d1f8828b6402cec8
 URL:		http://www.opensync.org/
+Patch0:		%{name}-python.patch
 BuildRequires:	libxml2-devel
 BuildRequires:	python-devel
 BuildRequires:	python-modules
@@ -57,8 +53,14 @@ Python bindings for opensync library.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
+%{__libtoolize}
+%{__aclocal}
+%{__autoconf}
+%{__autoheader}
+%{__automake}
 %configure --enable-static
 %{__make}
 
@@ -99,5 +101,5 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n python-opensync
 %defattr(644,root,root,755)
-#%attr(755,root,root) %{py_sitedir}/*.so.*
-%{py_sitescriptdir}/*.py[co]
+%attr(755,root,root) %{py_sitedir}/*.so
+%{py_sitedir}/*.py[co]
