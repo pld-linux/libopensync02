@@ -6,7 +6,7 @@ Release:	0.1
 License:	LGPL
 Group:		Libraries
 Source0:	http://www.opensync.org/attachment/wiki/download/%{name}-%{version}.tar.gz
-# Source0-md5:	ce94a69fb7ae7533d1f8828b6402cec8
+# Source0-md5:	8242a6fd13d20cb07911215c2e97aeed
 URL:		http://www.opensync.org/
 Patch0:		%{name}-python.patch
 BuildRequires:	autoconf
