@@ -2,7 +2,7 @@ Summary:	Data synchronization framework
 Summary(pl):	Szkielet do synchronizacji danych
 Name:		libopensync
 Version:	0.18
-Release:	0.1
+Release:	0.2
 License:	LGPL
 Group:		Libraries
 Source0:	http://www.opensync.org/attachment/wiki/download/%{name}-%{version}.tar.gz?format=raw
@@ -94,6 +94,9 @@ Wi±zania Pythona do biblioteki opensync.
 %install
 rm -rf $RPM_BUILD_ROOT
 
+install -d $RPM_BUILD_ROOT%{_libdir}/opensync/plugins \
+    $RPM_BUILD_ROOT%{_datadir}/opensync/defaults
+
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
@@ -112,6 +115,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/lib*.so.*.*.*
 %dir %{_libdir}/opensync
 %dir %{_libdir}/opensync/formats
+%dir %{_libdir}/opensync/plugins
+%dir %{_datadir}/opensync
+%dir %{_datadir}/opensync/defaults
 %attr(755,root,root) %{_libdir}/opensync/formats/*.so
 %{_libdir}/opensync/formats/*.la
 
