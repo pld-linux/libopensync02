@@ -16,6 +16,10 @@ BuildRequires:	libxml2-devel
 BuildRequires:	python-devel
 BuildRequires:	python-modules
 BuildRequires:	swig-python
+# no such opensync plugins (yet?)
+Obsoletes:	multisync-ldap
+Obsoletes:	multisync-opie
+Obsoletes:	multisync-syncml
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -45,6 +49,7 @@ Summary:	Header files for opensync library
 Summary(pl):	Pliki nag³ówkowe biblioteki opensync
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
+Obsoletes:	multisync-devel
 
 %description devel
 Header files for opensync library.
