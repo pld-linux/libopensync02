@@ -15,6 +15,7 @@ BuildRequires:	libtool
 BuildRequires:	libxml2-devel
 BuildRequires:	python-devel
 BuildRequires:	python-modules
+BuildRequires:	sqlite3-devel
 BuildRequires:	swig-python
 # no such opensync plugins (yet?)
 Obsoletes:	multisync-ldap
