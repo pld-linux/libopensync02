@@ -1,3 +1,5 @@
+%bcond_without	python
+%bcond_without	static_libs
 Summary:	Data synchronization framework
 Summary(pl):	Szkielet do synchronizacji danych
 Name:		libopensync
@@ -13,10 +15,12 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel
+%if %{with python}
 BuildRequires:	python-devel
 BuildRequires:	python-modules
-BuildRequires:	sqlite3-devel
 BuildRequires:	swig-python
+%endif
+BuildRequires:	sqlite3-devel
 # no such opensync plugins (yet?)
 Obsoletes:	multisync-ldap
 Obsoletes:	multisync-opie
@@ -94,7 +98,9 @@ Wi±zania Pythona do biblioteki opensync.
 %{__autoheader}
 %{__automake}
 %configure \
-	--enable-static
+	--%{?with_static_libs:en}%{!?with_static_libs:dis}able-static \
+	--%{?with_python:en}%{!?with_python:dis}able-python
+	
 %{__make}
 
 %install
@@ -134,11 +140,15 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/opensync*
 %{_pkgconfigdir}/*.pc
 
+%if %{with static_libs}
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/lib*.a
+%endif
 
+%if %{with python}
 %files -n python-opensync
 %defattr(644,root,root,755)
 %attr(755,root,root) %{py_sitedir}/*.so
 %{py_sitedir}/*.py[co]
+%endif
