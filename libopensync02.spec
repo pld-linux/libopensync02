@@ -1,5 +1,8 @@
-%bcond_without	python
-%bcond_without	static_libs
+#
+# Conditional build:
+%bcond_without	python		# don't build python binding
+%bcond_without	static_libs	# don't build static library
+#
 Summary:	Data synchronization framework
 Summary(pl):	Szkielet do synchronizacji danych
 Name:		libopensync
