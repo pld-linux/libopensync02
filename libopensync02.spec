@@ -116,6 +116,7 @@ install -d $RPM_BUILD_ROOT%{_libdir}/opensync/plugins \
 	DESTDIR=$RPM_BUILD_ROOT
 
 rm -f $RPM_BUILD_ROOT%{py_sitedir}/*.{py,la,a}
+rm -f $RPM_BUILD_ROOT%{_libdir}/opensync/formats/*.a
 
 %clean
 rm -rf $RPM_BUILD_ROOT
