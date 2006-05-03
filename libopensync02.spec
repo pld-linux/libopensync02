@@ -10,7 +10,8 @@ Version:	0.18
 Release:	0.2
 License:	LGPL
 Group:		Libraries
-Source0:	http://www.opensync.org/attachment/wiki/download/%{name}-%{version}.tar.gz?format=raw
+#Source0:	http://www.opensync.org/attachment/wiki/download/%{name}-%{version}.tar.gz?format=raw
+Source0:	%{name}-%{version}.tar.gz
 # Source0-md5:	ce94a69fb7ae7533d1f8828b6402cec8
 URL:		http://www.opensync.org/
 Patch0:		%{name}-python.patch
