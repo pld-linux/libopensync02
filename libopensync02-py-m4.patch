@@ -1,7 +1,6 @@
---- libopensync-0.18/acinclude.m4~	2005-04-23 20:49:39.000000000 +0300
-+++ libopensync-0.18/acinclude.m4	2006-09-15 17:31:19.643489125 +0300
-@@ -1108,45 +1108,30 @@
- 
+--- libopensync-0.18/acinclude.m4	2006-09-15 17:31:19.643489125 +0300
++++ libopensync-0.18/acinclude.m4	2006-09-15 17:36:47.410884025 +0300
+@@ -1109,44 +1109,29 @@
  	# Check for Python include path
  	AC_MSG_CHECKING([for Python include path])
 -	python_path=`echo $PYTHON | sed "s,/bin.*$,,"`
@@ -55,7 +54,8 @@
 -	PYTHON_EXTRA_LIBS=`$PYTHON -c "import distutils.sysconfig; \
 -                conf = distutils.sysconfig.get_config_var; \
 -                print conf('LOCALMODLIBS')+' '+conf('LIBS')"
+-	AC_MSG_RESULT($PYTHON_EXTRA_LIBS)`
 +	PYTHON_EXTRA_LIBS=$python_ldflags
- 	AC_MSG_RESULT($PYTHON_EXTRA_LIBS)`
++	AC_MSG_RESULT($PYTHON_EXTRA_LIBS)
  	AC_SUBST(PYTHON_EXTRA_LIBS)
  ])
