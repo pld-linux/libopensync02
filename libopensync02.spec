@@ -10,8 +10,7 @@ Version:	0.19
 Release:	0.1
 License:	LGPL
 Group:		Libraries
-# Source0Download:	http://www.opensync.org/wiki/download
-Source0:	%{name}-%{version}.tar.gz
+Source0:	http://www.opensync.org/attachment/wiki/download/%{name}-%{version}.tar.gz?format=raw
 # Source0-md5:	9475641b4670cb70d46ee2ac4c146009
 URL:		http://www.opensync.org/
 Patch0:		%{name}-py-m4.patch
