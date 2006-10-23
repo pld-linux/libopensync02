@@ -11,10 +11,13 @@ Release:	0.1
 License:	LGPL
 Group:		Libraries
 # Til it doesn't get fixed, we can't d/l tar.gz with suffic
-#Source0:	http://www.opensync.org/attachment/wiki/download/%{name}-%{version}.tar.gz?rev=&format=raw
+# what "it" ??
+# Source0Download:	http://www.opensync.org/wiki/download
+Source0:	http://www.opensync.org/attachment/wiki/download/%{name}-%{version}.tar.gz?rev=&format=raw
 # Source0-md5:	9475641b4670cb70d46ee2ac4c146009
-Source0:	%{name}-%{version}.tar.gz
+#Source0:	%{name}-%{version}.tar.gz
 URL:		http://www.opensync.org/
+Patch0:		%{name}-py-m4.patch
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool
@@ -40,7 +43,7 @@ a powerful sync-engine and the framework itself.
 
 The synchronization framework is kept very flexible and is capable of
 synchronizing any type of data, including contacts, calendar, tasks,
-notes and files. 
+notes and files.
 
 %description -l pl
 OpenSync to niezale¿ny od platformy i dystrybucji szkielet do
@@ -92,7 +95,8 @@ Python bindings for opensync library.
 Wi±zania Pythona do biblioteki opensync.
 
 %prep
-%setup -q 
+%setup -q
+%patch0 -p1
 
 %build
 %{__libtoolize}
@@ -103,7 +107,7 @@ Wi±zania Pythona do biblioteki opensync.
 %configure \
 	--%{?with_static_libs:en}%{!?with_static_libs:dis}able-static \
 	--%{?with_python:en}%{!?with_python:dis}able-python
-	
+
 %{__make}
 
 %install
