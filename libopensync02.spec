@@ -130,6 +130,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS ChangeLog NEWS README TODO
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_libdir}/lib*.so.*.*.*
+%attr(755,root,root) %{_libdir}/osplugin
 %dir %{_libdir}/opensync
 %dir %{_libdir}/opensync/formats
 %dir %{_libdir}/opensync/plugins
