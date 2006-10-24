@@ -1,6 +1,6 @@
---- libopensync-0.18/acinclude.m4~	2006-09-15 17:42:35.758740828 +0300
-+++ libopensync-0.18/acinclude.m4	2006-09-15 17:42:39.048815023 +0300
-@@ -1108,45 +1108,32 @@
+--- libopensync-0.19/acinclude.m4~	2006-09-15 17:42:35.758740828 +0300
++++ libopensync-0.19/acinclude.m4	2006-10-24 12:03:48.143737907 +0300
+@@ -1112,46 +1112,32 @@
  
  	# Check for Python include path
  	AC_MSG_CHECKING([for Python include path])
@@ -19,8 +19,8 @@
 +	if test -z "$python_includes" ; then
  		AC_MSG_ERROR([cannot find Python include path])
  	fi
+-	AC_SUBST([PYTHON_CPPFLAGS],[-I$python_path])
 +	AC_SUBST([PYTHON_CPPFLAGS],[-I$python_includes])
- 	AC_SUBST([PYTHON_CPPFLAGS],[-I$python_path])
  
  	# Check for Python library path
  	AC_MSG_CHECKING([for Python library path])
@@ -60,3 +60,4 @@
 +	AC_MSG_RESULT($PYTHON_EXTRA_LIBS)
  	AC_SUBST(PYTHON_EXTRA_LIBS)
  ])
+ dnl as-ac-expand.m4 0.2.0
