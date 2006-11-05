@@ -27,7 +27,6 @@ BuildRequires:	sqlite3-devel
 # no such opensync plugins (yet?)
 Obsoletes:	multisync-ldap
 Obsoletes:	multisync-opie
-Obsoletes:	multisync-syncml
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
