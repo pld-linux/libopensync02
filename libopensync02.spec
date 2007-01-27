@@ -6,12 +6,12 @@
 Summary:	Data synchronization framework
 Summary(pl):	Szkielet do synchronizacji danych
 Name:		libopensync
-Version:	0.19
-Release:	0.1
+Version:	0.20
+Release:	1
 License:	LGPL
 Group:		Libraries
 Source0:	http://www.opensync.org/attachment/wiki/download/%{name}-%{version}.tar.gz?format=raw
-# Source0-md5:	9475641b4670cb70d46ee2ac4c146009
+# Source0-md5:	c685e69929333a763c51987b4a19d50d
 URL:		http://www.opensync.org/
 Patch0:		%{name}-py-m4.patch
 BuildRequires:	autoconf
@@ -93,6 +93,8 @@ Wi±zania Pythona do biblioteki opensync.
 %setup -q
 %patch0 -p1
 
+[ -x "%{_bindir}/python%{py_ver}-config" ] && sed -i -e 's#python-config#%{_bindir}/python%{py_ver}-config#g' acinclude.m4
+
 %build
 %{__libtoolize}
 %{__aclocal}
@@ -100,6 +102,7 @@ Wi±zania Pythona do biblioteki opensync.
 %{__autoheader}
 %{__automake}
 %configure \
+	%{!?debug:--disable-debug --disable-tracing} \
 	--%{?with_static_libs:en}%{!?with_static_libs:dis}able-static \
 	--%{?with_python:en}%{!?with_python:dis}able-python
 
