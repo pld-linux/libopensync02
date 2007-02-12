@@ -4,7 +4,7 @@
 %bcond_without	static_libs	# don't build static library
 #
 Summary:	Data synchronization framework
-Summary(pl):	Szkielet do synchronizacji danych
+Summary(pl.UTF-8):   Szkielet do synchronizacji danych
 Name:		libopensync
 Version:	0.20
 Release:	1
@@ -40,20 +40,20 @@ The synchronization framework is kept very flexible and is capable of
 synchronizing any type of data, including contacts, calendar, tasks,
 notes and files.
 
-%description -l pl
-OpenSync to niezale¿ny od platformy i dystrybucji szkielet do
+%description -l pl.UTF-8
+OpenSync to niezaleÅ¼ny od platformy i dystrybucji szkielet do
 synchronizacji danych.
 
-Sk³ada siê z kilku wtyczek, których mo¿na u¿ywaæ do ³±czenia siê z
-urz±dzeniami, potê¿nego silnika synchronizuj±cego i samego szkieletu.
+SkÅ‚ada siÄ™ z kilku wtyczek, ktÃ³rych moÅ¼na uÅ¼ywaÄ‡ do Å‚Ä…czenia siÄ™ z
+urzÄ…dzeniami, potÄ™Å¼nego silnika synchronizujÄ…cego i samego szkieletu.
 
 Szkielet do synchronizacji jest utrzymywany jako bardzo elastyczny i
-potrafi±cy synchronizowaæ dowolny rodzaj danych, w³±cznie z
+potrafiÄ…cy synchronizowaÄ‡ dowolny rodzaj danych, wÅ‚Ä…cznie z
 kontaktami, kalendarzem, zadaniami, notatkami i plikami.
 
 %package devel
 Summary:	Header files for opensync library
-Summary(pl):	Pliki nag³ówkowe biblioteki opensync
+Summary(pl.UTF-8):   Pliki nagÅ‚Ã³wkowe biblioteki opensync
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Obsoletes:	multisync-devel
@@ -61,24 +61,24 @@ Obsoletes:	multisync-devel
 %description devel
 Header files for opensync library.
 
-%description devel -l pl
-Pliki nag³ówkowe biblioteki opensync.
+%description devel -l pl.UTF-8
+Pliki nagÅ‚Ã³wkowe biblioteki opensync.
 
 %package static
 Summary:	Static opensync library
-Summary(pl):	Statyczna biblioteka opensync
+Summary(pl.UTF-8):   Statyczna biblioteka opensync
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 Static opensync library.
 
-%description static -l pl
+%description static -l pl.UTF-8
 Statyczna biblioteka opensync.
 
 %package -n python-opensync
 Summary:	Python bindings for opensync library
-Summary(pl):	Wi±zania Pythona do biblioteki opensync
+Summary(pl.UTF-8):   WiÄ…zania Pythona do biblioteki opensync
 Group:		Libraries/Python
 Requires:	%{name} = %{version}-%{release}
 %pyrequires_eq  python-libs
@@ -86,8 +86,8 @@ Requires:	%{name} = %{version}-%{release}
 %description -n python-opensync
 Python bindings for opensync library.
 
-%description -n python-opensync -l pl
-Wi±zania Pythona do biblioteki opensync.
+%description -n python-opensync -l pl.UTF-8
+WiÄ…zania Pythona do biblioteki opensync.
 
 %prep
 %setup -q
