@@ -4,7 +4,7 @@
 %bcond_without	static_libs	# don't build static library
 #
 Summary:	Data synchronization framework
-Summary(pl.UTF-8):   Szkielet do synchronizacji danych
+Summary(pl.UTF-8):	Szkielet do synchronizacji danych
 Name:		libopensync
 Version:	0.20
 Release:	1
@@ -53,7 +53,7 @@ kontaktami, kalendarzem, zadaniami, notatkami i plikami.
 
 %package devel
 Summary:	Header files for opensync library
-Summary(pl.UTF-8):   Pliki nagłówkowe biblioteki opensync
+Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki opensync
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Obsoletes:	multisync-devel
@@ -66,7 +66,7 @@ Pliki nagłówkowe biblioteki opensync.
 
 %package static
 Summary:	Static opensync library
-Summary(pl.UTF-8):   Statyczna biblioteka opensync
+Summary(pl.UTF-8):	Statyczna biblioteka opensync
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
@@ -78,7 +78,7 @@ Statyczna biblioteka opensync.
 
 %package -n python-opensync
 Summary:	Python bindings for opensync library
-Summary(pl.UTF-8):   Wiązania Pythona do biblioteki opensync
+Summary(pl.UTF-8):	Wiązania Pythona do biblioteki opensync
 Group:		Libraries/Python
 Requires:	%{name} = %{version}-%{release}
 %pyrequires_eq  python-libs
