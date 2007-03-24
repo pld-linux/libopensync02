@@ -6,12 +6,12 @@
 Summary:	Data synchronization framework
 Summary(pl.UTF-8):	Szkielet do synchronizacji danych
 Name:		libopensync
-Version:	0.20
+Version:	0.21.1
 Release:	1
 License:	LGPL
 Group:		Libraries
-Source0:	http://www.opensync.org/attachment/wiki/download/%{name}-%{version}.tar.gz?format=raw
-# Source0-md5:	c685e69929333a763c51987b4a19d50d
+Source0:	http://www.opensync.org/attachment/wiki/download/%{name}-%{version}.tar.bz2?format=raw
+# Source0-md5:	d86bbc5d0e49bd8fa5db5c97abd33038
 URL:		http://www.opensync.org/
 Patch0:		%{name}-py-m4.patch
 BuildRequires:	autoconf
