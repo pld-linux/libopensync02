@@ -1,0 +1,31 @@
+--- libopensync-0.30/SConstruct~	2007-05-19 12:02:29.000000000 +0300
++++ libopensync-0.30/SConstruct	2007-06-14 23:29:22.537794000 +0300
+@@ -38,8 +38,8 @@
+ opts.Add(BoolOption('enable_python', 'Build python wrapper? (swig required)', 0))
+ opts.Add(BoolOption('debug_modules', 'Should unloading of shared modules be avoided (DEBUGGING ONLY!)', 0))
+ opts.Add(BoolOption('enable_doxygen', 'Generating OpenSync API with doxygen?', 0))
+-opts.Add(('APPEND_LDFLAGS', 'Linker flags'))
+-opts.Add(('APPEND_CCFLAGS', 'Compiler flags'))
++opts.Add(('LDFLAGS', 'Linker flags'))
++opts.Add(('CFLAGS', 'Compiler flags'))
+ opts.Add(('DESTDIR', 'Set the root directory to install into ( /path/to/DESTDIR )', ''))
+ 
+ target_dir = SelectBuildDir('build')
+@@ -61,13 +61,13 @@
+ You can set the following options:
+ """ + opts.GenerateHelpText(env))
+ 
+-env.Append(CCFLAGS = r'-DENABLE_TRACE=$enable_trace')
+-env.Append(CCFLAGS = Split('$APPEND_CCFLAGS'))
+-env.Append(LDFLAGS = Split('$APPEND_LDFLAGS'))
++env.Append(CFLAGS = r'-DENABLE_TRACE=$enable_trace')
+ 
+ env.Replace(
+        CC = env['CC'],
+-       CXX = env['CXX']
++       CXX = env['CXX'],
++       CXXFLAGS = env['CXXFLAGS'],
++       CFLAGS = env['CFLAGS'],
+ )
+ 
+ # pkg config files
