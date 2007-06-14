@@ -1,7 +1,6 @@
 #
 # Conditional build:
 %bcond_without	python		# don't build python binding
-%bcond_without	static_libs	# don't build static library
 #
 Summary:	Data synchronization framework
 Summary(pl.UTF-8):	Szkielet do synchronizacji danych
@@ -13,6 +12,7 @@ Group:		Libraries
 Source0:	http://www.opensync.org/attachment/wiki/download/%{name}-%{version}.tar.bz2?format=raw
 # Source0-md5:	1b52417878ab4ede584ce18edacfa548
 URL:		http://www.opensync.org/
+Patch0:		%{name}-opt.patch
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	glib2-devel >= 1:2.10
@@ -58,6 +58,7 @@ Summary:	Header files for opensync library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki opensync
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
+Obsoletes:	libopensync-static
 Obsoletes:	multisync-devel
 
 %description devel
@@ -65,18 +66,6 @@ Header files for opensync library.
 
 %description devel -l pl.UTF-8
 Pliki nagłówkowe biblioteki opensync.
-
-%package static
-Summary:	Static opensync library
-Summary(pl.UTF-8):	Statyczna biblioteka opensync
-Group:		Development/Libraries
-Requires:	%{name}-devel = %{version}-%{release}
-
-%description static
-Static opensync library.
-
-%description static -l pl.UTF-8
-Statyczna biblioteka opensync.
 
 %package -n python-opensync
 Summary:	Python bindings for opensync library
@@ -93,6 +82,7 @@ Wiązania Pythona do biblioteki opensync.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 %scons \
@@ -135,12 +125,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/lib*.so
 %{_includedir}/opensync*
 %{_pkgconfigdir}/*.pc
-
-%if %{with static_libs}
-%files static
-%defattr(644,root,root,755)
-%{_libdir}/lib*.a
-%endif
 
 %if %{with python}
 %files -n python-opensync
