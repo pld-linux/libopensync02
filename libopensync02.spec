@@ -6,24 +6,26 @@
 Summary:	Data synchronization framework
 Summary(pl.UTF-8):	Szkielet do synchronizacji danych
 Name:		libopensync
-Version:	0.22
+Version:	0.30
 Release:	1
 License:	LGPL
 Group:		Libraries
 Source0:	http://www.opensync.org/attachment/wiki/download/%{name}-%{version}.tar.bz2?format=raw
-# Source0-md5:	f563ce2543312937a9afb4f8445ef932
+# Source0-md5:	1b52417878ab4ede584ce18edacfa548
 URL:		http://www.opensync.org/
-Patch0:		%{name}-py-m4.patch
 BuildRequires:	autoconf
 BuildRequires:	automake
+BuildRequires:	glib2-devel >= 1:2.10
 BuildRequires:	libtool
-BuildRequires:	libxml2-devel
+BuildRequires:	libxml2-devel >= 1:2.6
+BuildRequires:	pkgconfig
+BuildRequires:	scons
+BuildRequires:	sqlite3-devel >= 3.3
 %if %{with python}
 BuildRequires:	python-devel
 BuildRequires:	python-modules
 BuildRequires:	swig-python
 %endif
-BuildRequires:	sqlite3-devel
 # no such opensync plugins (yet?)
 Obsoletes:	multisync-ldap
 Obsoletes:	multisync-opie
@@ -91,34 +93,23 @@ Wiązania Pythona do biblioteki opensync.
 
 %prep
 %setup -q
-%patch0 -p1
-
-[ -x "%{_bindir}/python%{py_ver}-config" ] && sed -i -e 's#python-config#%{_bindir}/python%{py_ver}-config#g' acinclude.m4
 
 %build
-%{__libtoolize}
-%{__aclocal}
-%{__autoconf}
-%{__autoheader}
-%{__automake}
-%configure \
-	%{!?debug:--disable-debug --disable-tracing} \
-	--%{?with_static_libs:en}%{!?with_static_libs:dis}able-static \
-	--%{?with_python:en}%{!?with_python:dis}able-python
-
-%{__make}
+%scons \
+	prefix=%{_prefix} \
+	%{?with_python:enable_python=1}
 
 %install
 rm -rf $RPM_BUILD_ROOT
+%scons install \
+	DESTDIR=$RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT%{_libdir}/opensync/plugins \
     $RPM_BUILD_ROOT%{_datadir}/opensync/defaults
 
-%{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT
-
-rm -f $RPM_BUILD_ROOT%{py_sitedir}/*.{py,la,a}
-rm -f $RPM_BUILD_ROOT%{_libdir}/opensync/formats/*.a
+%py_ocomp $RPM_BUILD_ROOT%{py_sitedir}
+%py_comp $RPM_BUILD_ROOT%{py_sitedir}
+%py_postclean
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -128,22 +119,20 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog NEWS README TODO
+%doc AUTHORS README
 %attr(755,root,root) %{_bindir}/*
-%attr(755,root,root) %{_libdir}/lib*.so.*.*.*
-%attr(755,root,root) %{_libdir}/osplugin
 %dir %{_libdir}/opensync
 %dir %{_libdir}/opensync/formats
 %dir %{_libdir}/opensync/plugins
 %dir %{_datadir}/opensync
 %dir %{_datadir}/opensync/defaults
+%{_datadir}/opensync/capabilities
+%{_datadir}/opensync/descriptions
 %attr(755,root,root) %{_libdir}/opensync/formats/*.so
-%{_libdir}/opensync/formats/*.la
 
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/lib*.so
-%{_libdir}/lib*.la
 %{_includedir}/opensync*
 %{_pkgconfigdir}/*.pc
 
