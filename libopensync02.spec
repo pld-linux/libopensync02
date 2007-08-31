@@ -20,6 +20,7 @@ Source0:	http://www.opensync.org/attachment/wiki/download/%{name}-%{version}.tar
 URL:		http://www.opensync.org/
 Patch0:		%{name}-opt.patch
 Patch1:		%{name}-wrap.patch
+Patch2:		%{name}-noerror.patch
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	glib2-devel >= 1:2.10
@@ -92,6 +93,7 @@ Wiązania Pythona do biblioteki opensync.
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 %scons \
