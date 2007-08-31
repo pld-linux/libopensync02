@@ -1,3 +1,9 @@
+# TODO
+# - CFLAGS not passed from spec
+# - buildfail:
+#wrapper/opensync_wrap.c: In function `GroupEnv_add_group':
+#wrapper/opensync_wrap.c:3559: error: too few arguments to function `osync_group_env_add_group'
+#scons: *** [wrapper/opensync_wrap.os] Error 1
 #
 # Conditional build:
 %bcond_without	python		# don't build python binding
@@ -5,12 +11,12 @@
 Summary:	Data synchronization framework
 Summary(pl.UTF-8):	Szkielet do synchronizacji danych
 Name:		libopensync
-Version:	0.30
-Release:	1
+Version:	0.31
+Release:	0.1
 License:	LGPL
 Group:		Libraries
 Source0:	http://www.opensync.org/attachment/wiki/download/%{name}-%{version}.tar.bz2?format=raw
-# Source0-md5:	1b52417878ab4ede584ce18edacfa548
+# Source0-md5:	caf4fd1b174f4863ba79ab074a29b054
 URL:		http://www.opensync.org/
 Patch0:		%{name}-opt.patch
 BuildRequires:	autoconf
