@@ -9,7 +9,7 @@ Summary(pl.UTF-8):	Szkielet do synchronizacji danych
 Name:		libopensync
 Version:	0.31
 Release:	1
-License:	LGPL
+License:	LGPL v2.1+
 Group:		Libraries
 Source0:	http://www.opensync.org/attachment/wiki/download/%{name}-%{version}.tar.bz2?format=raw
 # Source0-md5:	caf4fd1b174f4863ba79ab074a29b054
@@ -63,6 +63,7 @@ Summary:	Header files for opensync library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki opensync
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
+Requires:	glib2-devel >= 1:2.10
 Obsoletes:	libopensync-static
 Obsoletes:	multisync-devel
 
@@ -131,13 +132,14 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/lib*.so
-%{_includedir}/opensync*
-%{_pkgconfigdir}/*.pc
+%attr(755,root,root) %{_libdir}/libopensync.so
+%{_includedir}/opensync-1.0
+%{_pkgconfigdir}/opensync-1.0.pc
+%{_pkgconfigdir}/osengine-1.0.pc
 
 %if %{with python}
 %files -n python-opensync
 %defattr(644,root,root,755)
-%attr(755,root,root) %{py_sitedir}/*.so
-%{py_sitedir}/*.py[co]
+%attr(755,root,root) %{py_sitedir}/_opensync.so
+%{py_sitedir}/opensync.py[co]
 %endif
