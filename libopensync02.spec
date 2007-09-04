@@ -11,8 +11,8 @@ Version:	0.31
 Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
-Source0:	http://www.opensync.org/attachment/wiki/download/%{name}-%{version}.tar.bz2
-# Source0-md5:	e59cce8eebcb25ca0faf9499a52e5974
+Source0:	http://www.opensync.org/attachment/wiki/download/%{name}-%{version}.tar.bz2?format=raw
+# Source0-md5:	caf4fd1b174f4863ba79ab074a29b054
 URL:		http://www.opensync.org/
 Patch0:		%{name}-opt.patch
 Patch1:		%{name}-wrap.patch
