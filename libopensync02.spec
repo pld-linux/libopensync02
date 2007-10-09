@@ -8,7 +8,7 @@ Summary(pl.UTF-8):	Szkielet do synchronizacji danych
 Name:		libopensync
 # WARNING: don't go for 0.3x line - it's DEVELopment series
 Version:	0.22
-Release:	2
+Release:	3
 Epoch:		1
 License:	LGPL
 Group:		Libraries
@@ -58,6 +58,7 @@ Summary:	Header files for opensync library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki opensync
 Group:		Development/Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	sqlite3-devel
 Obsoletes:	multisync-devel
 
 %description devel
