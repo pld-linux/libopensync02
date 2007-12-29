@@ -8,7 +8,7 @@ Summary(pl.UTF-8):	Szkielet do synchronizacji danych
 Name:		libopensync
 # WARNING: don't go for 0.3x line - it's DEVELopment series
 Version:	0.22
-Release:	3
+Release:	4
 Epoch:		1
 License:	LGPL
 Group:		Libraries
