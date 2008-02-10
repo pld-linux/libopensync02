@@ -18,6 +18,7 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	cmake
 BuildRequires:	glib2-devel >= 1:2.10
+BuildRequires:	libint-devel
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 1:2.6
 BuildRequires:	pkgconfig
