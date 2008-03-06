@@ -110,7 +110,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS README
 %attr(755,root,root) %{_bindir}/*
-%attr(755,root,root) %{_libdir}/libopensync.so.*.*.*
+%attr(755,root,root) %{_libdir}/libopensync.so.*
 %dir %{_libdir}/opensync-*
 %dir %{_libdir}/opensync-*/formats
 %dir %{_libdir}/opensync-*/osplugin
@@ -134,5 +134,5 @@ rm -rf $RPM_BUILD_ROOT
 %files -n python-opensync
 %defattr(644,root,root,755)
 %attr(755,root,root) %{py_sitedir}/_opensync.so
-#%{py_sitedir}/opensync.py[co]
+%{py_sitedir}/opensync.py
 %endif
