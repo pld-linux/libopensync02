@@ -5,14 +5,14 @@
 #
 Summary:	Data synchronization framework
 Summary(pl.UTF-8):	Szkielet do synchronizacji danych
-Name:		libopensync
-# WARNING: don't go for 0.3x line - it's DEVELopment series
+Name:		libopensync02
+# WARNING: don't go for 0.3x line - it's DEVELopment series and is available in libopensync.spec
 Version:	0.22
-Release:	4
+Release:	1
 Epoch:		1
 License:	LGPL v2.1+
 Group:		Libraries
-Source0:	http://opensync.org/download/releases/%{version}/%{name}-%{version}.tar.bz2
+Source0:	http://opensync.org/download/releases/%{version}/libopensync-%{version}.tar.bz2
 # Source0-md5:	f563ce2543312937a9afb4f8445ef932
 Patch0:		%{name}-py-m4.patch
 URL:		http://www.opensync.org/
@@ -29,6 +29,7 @@ BuildRequires:	sqlite3-devel
 # no such opensync plugins (yet?)
 Obsoletes:	multisync-ldap
 Obsoletes:	multisync-opie
+Obsoletes:	libopensync < 0.33
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -60,6 +61,7 @@ Group:		Development/Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Requires:	sqlite3-devel
 Obsoletes:	multisync-devel
+Obsoletes:      libopensync-devel < 0.33
 
 %description devel
 Header files for opensync library.
@@ -72,6 +74,7 @@ Summary:	Static opensync library
 Summary(pl.UTF-8):	Statyczna biblioteka opensync
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
+Obsoletes:      libopensync-static < 0.33
 
 %description static
 Static opensync library.
@@ -79,21 +82,22 @@ Static opensync library.
 %description static -l pl.UTF-8
 Statyczna biblioteka opensync.
 
-%package -n python-opensync
+%package -n python-opensync02
 Summary:	Python bindings for opensync library
 Summary(pl.UTF-8):	Wiązania Pythona do biblioteki opensync
 Group:		Libraries/Python
 Requires:	%{name} = %{epoch}:%{version}-%{release}
+Obsoletes:      python-opensync < 0.33
 %pyrequires_eq  python-libs
 
-%description -n python-opensync
+%description -n python-opensync02
 Python bindings for opensync library.
 
-%description -n python-opensync -l pl.UTF-8
+%description -n python-opensync02 -l pl.UTF-8
 Wiązania Pythona do biblioteki opensync.
 
 %prep
-%setup -q
+%setup -q -n libopensync-%{version}
 %patch0 -p1
 
 [ -x "%{_bindir}/python%{py_ver}-config" ] && sed -i -e 's#python-config#%{_bindir}/python%{py_ver}-config#g' acinclude.m4
@@ -157,7 +161,7 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %if %{with python}
-%files -n python-opensync
+%files -n python-opensync02
 %defattr(644,root,root,755)
 %attr(755,root,root) %{py_sitedir}/*.so
 %{py_sitedir}/*.py[co]
