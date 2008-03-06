@@ -61,7 +61,7 @@ Group:		Development/Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Requires:	sqlite3-devel
 Obsoletes:	multisync-devel
-Obsoletes:      libopensync-devel < 0.33
+Obsoletes:	libopensync-devel < 0.33
 
 %description devel
 Header files for opensync library.
@@ -74,7 +74,7 @@ Summary:	Static opensync library
 Summary(pl.UTF-8):	Statyczna biblioteka opensync
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
-Obsoletes:      libopensync-static < 0.33
+Obsoletes:	libopensync-static < 0.33
 
 %description static
 Static opensync library.
@@ -87,8 +87,8 @@ Summary:	Python bindings for opensync library
 Summary(pl.UTF-8):	Wiązania Pythona do biblioteki opensync
 Group:		Libraries/Python
 Requires:	%{name} = %{epoch}:%{version}-%{release}
-Obsoletes:      python-opensync < 0.33
-%pyrequires_eq  python-libs
+Obsoletes:	python-opensync < 0.33
+%pyrequires_eq	python-libs
 
 %description -n python-opensync02
 Python bindings for opensync library.
@@ -119,7 +119,7 @@ Wiązania Pythona do biblioteki opensync.
 rm -rf $RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT%{_libdir}/opensync/plugins \
-    $RPM_BUILD_ROOT%{_datadir}/opensync/defaults
+	$RPM_BUILD_ROOT%{_datadir}/opensync/defaults
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
