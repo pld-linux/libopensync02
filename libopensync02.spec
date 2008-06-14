@@ -123,6 +123,10 @@ install -d $RPM_BUILD_ROOT%{_libdir}/opensync/plugins \
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
+for bin in osyncbinary osyncdump osyncplugin osyncstress osynctest; do
+	mv $RPM_BUILD_ROOT%{_bindir}/${bin}{,02}
+done
+
 rm -f $RPM_BUILD_ROOT%{py_sitedir}/*.{py,la,a}
 rm -f $RPM_BUILD_ROOT%{_libdir}/opensync/formats/*.a
 
@@ -135,8 +139,7 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README TODO
-# use these from opensync 0.3.x
-# %attr(755,root,root) %{_bindir}/*
+%attr(755,root,root) %{_bindir}/*02
 %attr(755,root,root) %{_libdir}/lib*.so.*.*.*
 %attr(755,root,root) %{_libdir}/osplugin
 %dir %{_libdir}/opensync
