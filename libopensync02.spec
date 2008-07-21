@@ -7,7 +7,7 @@ Summary:	Data synchronization framework
 Summary(pl.UTF-8):	Szkielet do synchronizacji danych
 Name:		libopensync02
 Version:	0.22
-Release:	2
+Release:	3
 Epoch:		1
 License:	LGPL v2.1+
 Group:		Libraries
@@ -61,6 +61,7 @@ Requires:	%{name} = %{epoch}:%{version}-%{release}
 Requires:	sqlite3-devel
 Obsoletes:	multisync-devel
 Obsoletes:	libopensync-devel < 0.33
+Conflicts:	libopensync-devel >= 0.33
 
 %description devel
 Header files for opensync library.
