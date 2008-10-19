@@ -7,7 +7,7 @@ Summary:	Data synchronization framework
 Summary(pl.UTF-8):	Szkielet do synchronizacji danych
 Name:		libopensync02
 Version:	0.22
-Release:	4
+Release:	5
 Epoch:		1
 License:	LGPL v2.1+
 Group:		Libraries
@@ -101,6 +101,8 @@ Wiązania Pythona do biblioteki opensync.
 %patch0 -p1
 
 [ -x "%{_bindir}/python%{py_ver}-config" ] && sed -i -e 's#python-config#%{_bindir}/python%{py_ver}-config#g' acinclude.m4
+
+sed -i -e 's#-Werror##g' opensync/Makefile.am
 
 %build
 %{__libtoolize}
