@@ -19,12 +19,13 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel
+BuildRequires:	sed >= 4.0
+BuildRequires:	sqlite3-devel
 %if %{with python}
 BuildRequires:	python-devel
 BuildRequires:	python-modules
 BuildRequires:	swig-python
 %endif
-BuildRequires:	sqlite3-devel
 # no such opensync plugins (yet?)
 Obsoletes:	multisync-ldap
 Obsoletes:	multisync-opie
