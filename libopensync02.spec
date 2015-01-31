@@ -133,7 +133,7 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_libdir}/opensync/plugins \
 	$RPM_BUILD_ROOT%{_datadir}/opensync/defaults
 
-%{__make} install \
+%{__make} -j1 install \
 	DESTDIR=$RPM_BUILD_ROOT
 
 for bin in osyncbinary osyncdump osyncplugin osyncstress osynctest; do
