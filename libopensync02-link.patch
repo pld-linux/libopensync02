@@ -1,0 +1,8 @@
+--- libopensync-0.22/formats/vformats-xml/Makefile.am.orig	2007-03-27 13:49:27.000000000 +0200
++++ libopensync-0.22/formats/vformats-xml/Makefile.am	2015-01-31 17:15:59.660032499 +0100
+@@ -47,4 +47,4 @@
+ 
+ libopensync_xml_la_SOURCES = xml-support.c
+ libopensync_xml_la_LDFLAGS = @GCOV_LDFLAGS@
+-libopensync_xml_la_LIBADD = @PACKAGE_LIBS@ @LIBS@
++libopensync_xml_la_LIBADD = $(top_builddir)/opensync/libopensync.la @PACKAGE_LIBS@ @LIBS@

@@ -1,0 +1,15 @@
+--- libopensync-0.22/acinclude.m4.orig	2015-01-31 16:03:17.056882247 +0100
++++ libopensync-0.22/acinclude.m4	2015-01-31 16:17:02.206847619 +0100
+@@ -1008,9 +1008,9 @@
+                         if test -z "$available_patch" ; then
+                                 [available_patch=0]
+                         fi
+-                        if test $available_major -ne $required_major \
+-                                -o $available_minor -ne $required_minor \
+-                                -o $available_patch -lt $required_patch ; then
++                        if test $available_major -lt $required_major || \
++                                test $available_major -eq $required_major -a $available_minor -lt $required_minor || \
++                                test $availablr_major -eq $required_major -a $available_minor -eq $required_minor -a $available_patch -lt $required_patch ; then
+                                 AC_MSG_WARN([SWIG version >= $1 is required.  You have $swig_version.  You should look at http://www.swig.org])
+                                 SWIG='echo "Error: SWIG version >= $1 is required.  You have '"$swig_version"'.  You should look at http://www.swig.org" ; false'
+                         else

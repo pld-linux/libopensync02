@@ -14,17 +14,23 @@ Group:		Libraries
 Source0:	http://opensync.org/download/releases/%{version}/libopensync-%{version}.tar.bz2
 # Source0-md5:	f563ce2543312937a9afb4f8445ef932
 Patch0:		%{name}-py-m4.patch
+Patch1:		%{name}-swig.patch
+Patch2:		%{name}-memset.patch
+Patch3:		%{name}-link.patch
 URL:		http://www.opensync.org/
-BuildRequires:	autoconf
+BuildRequires:	autoconf >= 2.58
 BuildRequires:	automake
+BuildRequires:	check-devel >= 0.9.0
+BuildRequires:	glib2-devel >= 2.0
 BuildRequires:	libtool
-BuildRequires:	libxml2-devel
+BuildRequires:	libxml2-devel >= 2.0
+BuildRequires:	pkgconfig
 BuildRequires:	sed >= 4.0
 BuildRequires:	sqlite3-devel
 %if %{with python}
-BuildRequires:	python-devel
-BuildRequires:	python-modules
-BuildRequires:	swig-python
+BuildRequires:	python-devel >= 2.2
+BuildRequires:	python-modules >= 2.2
+BuildRequires:	swig-python >= 1.3.17
 %endif
 # no such opensync plugins (yet?)
 Obsoletes:	multisync-ldap
@@ -100,10 +106,14 @@ Wiązania Pythona do biblioteki opensync.
 %prep
 %setup -q -n libopensync-%{version}
 %patch0 -p1
+%patch1 -p1
+%patch2 -p1
+%patch3 -p1
 
 [ -x "%{_bindir}/python%{py_ver}-config" ] && sed -i -e 's#python-config#%{_bindir}/python%{py_ver}-config#g' acinclude.m4
 
-sed -i -e 's#-Werror##g' opensync/Makefile.am
+# avoid errors on glib deprecation warnings
+%{__sed} -i -e 's#-Werror##g' opensync/Makefile.am osengine/Makefile.am tools/Makefile.am
 
 %build
 %{__libtoolize}
@@ -113,14 +123,13 @@ sed -i -e 's#-Werror##g' opensync/Makefile.am
 %{__automake}
 %configure \
 	%{!?debug:--disable-debug --disable-tracing} \
-	--%{?with_static_libs:en}%{!?with_static_libs:dis}able-static \
-	--%{?with_python:en}%{!?with_python:dis}able-python
+	%{?with_static_libs:--enable-static} \
+	--enable-python%{!?with_python:=no}
 
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-
 install -d $RPM_BUILD_ROOT%{_libdir}/opensync/plugins \
 	$RPM_BUILD_ROOT%{_datadir}/opensync/defaults
 
@@ -128,11 +137,16 @@ install -d $RPM_BUILD_ROOT%{_libdir}/opensync/plugins \
 	DESTDIR=$RPM_BUILD_ROOT
 
 for bin in osyncbinary osyncdump osyncplugin osyncstress osynctest; do
-	mv $RPM_BUILD_ROOT%{_bindir}/${bin}{,02}
+	%{__mv} $RPM_BUILD_ROOT%{_bindir}/${bin}{,02}
 done
 
-rm -f $RPM_BUILD_ROOT%{py_sitedir}/*.{py,la,a}
-rm -f $RPM_BUILD_ROOT%{_libdir}/opensync/formats/*.a
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/opensync/formats/*.la
+%{?with_static_libs:%{__rm} $RPM_BUILD_ROOT%{_libdir}/opensync/formats/*.a}
+%if %{with python}
+%py_postclean
+%{__rm} $RPM_BUILD_ROOT%{py_sitedir}/*.la
+%{?with_static_libs:%{__rm} $RPM_BUILD_ROOT%{py_sitedir}/*.a}
+%endif
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -143,33 +157,48 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README TODO
-%attr(755,root,root) %{_bindir}/*02
-%attr(755,root,root) %{_libdir}/lib*.so.*.*.*
+%attr(755,root,root) %{_bindir}/osyncbinary02
+%attr(755,root,root) %{_bindir}/osyncdump02
+%attr(755,root,root) %{_bindir}/osyncplugin02
+%attr(755,root,root) %{_bindir}/osyncstress02
+%attr(755,root,root) %{_bindir}/osynctest02
+%attr(755,root,root) %{_libdir}/libopensync.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libopensync.so.0
+%attr(755,root,root) %{_libdir}/libopensync-xml.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libopensync-xml.so.0
+%attr(755,root,root) %{_libdir}/libosengine.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libosengine.so.0
 %attr(755,root,root) %{_libdir}/osplugin
 %dir %{_libdir}/opensync
 %dir %{_libdir}/opensync/formats
+%attr(755,root,root) %{_libdir}/opensync/formats/*.so
 %dir %{_libdir}/opensync/plugins
 %dir %{_datadir}/opensync
 %dir %{_datadir}/opensync/defaults
-%attr(755,root,root) %{_libdir}/opensync/formats/*.so
-%{_libdir}/opensync/formats/*.la
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/lib*.so
-%{_libdir}/lib*.la
-%{_includedir}/opensync*
-%{_pkgconfigdir}/*.pc
+%attr(755,root,root) %{_libdir}/libopensync.so
+%attr(755,root,root) %{_libdir}/libopensync-xml.so
+%attr(755,root,root) %{_libdir}/libosengine.so
+%{_libdir}/libopensync.la
+%{_libdir}/libopensync-xml.la
+%{_libdir}/libosengine.la
+%{_includedir}/opensync-1.0
+%{_pkgconfigdir}/opensync-1.0.pc
+%{_pkgconfigdir}/osengine-1.0.pc
 
 %if %{with static_libs}
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/lib*.a
+%{_libdir}/libopensync.a
+%{_libdir}/libopensync-xml.a
+%{_libdir}/libosengine.a
 %endif
 
 %if %{with python}
 %files -n python-opensync02
 %defattr(644,root,root,755)
-%attr(755,root,root) %{py_sitedir}/*.so
-%{py_sitedir}/*.py[co]
+%attr(755,root,root) %{py_sitedir}/_opensync.so
+%{py_sitedir}/opensync.py[co]
 %endif
