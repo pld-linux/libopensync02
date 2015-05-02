@@ -7,7 +7,7 @@ Summary:	Data synchronization framework
 Summary(pl.UTF-8):	Szkielet do synchronizacji danych
 Name:		libopensync02
 Version:	0.22
-Release:	7
+Release:	8
 Epoch:		1
 License:	LGPL v2.1+
 Group:		Libraries
