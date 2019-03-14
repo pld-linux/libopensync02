@@ -7,7 +7,7 @@ Summary:	Data synchronization framework
 Summary(pl.UTF-8):	Szkielet do synchronizacji danych
 Name:		libopensync02
 Version:	0.22
-Release:	9
+Release:	10
 Epoch:		1
 License:	LGPL v2.1+
 Group:		Libraries
@@ -168,7 +168,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %ghost %{_libdir}/libopensync-xml.so.0
 %attr(755,root,root) %{_libdir}/libosengine.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libosengine.so.0
-%attr(755,root,root) %{_libdir}/osplugin
+%attr(755,root,root) %{_libexecdir}/osplugin
 %dir %{_libdir}/opensync
 %dir %{_libdir}/opensync/formats
 %attr(755,root,root) %{_libdir}/opensync/formats/*.so
