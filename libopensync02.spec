@@ -17,6 +17,7 @@ Patch0:		%{name}-py-m4.patch
 Patch1:		%{name}-swig.patch
 Patch2:		%{name}-memset.patch
 Patch3:		%{name}-link.patch
+Patch4:		includes.patch
 URL:		http://www.opensync.org/
 BuildRequires:	autoconf >= 2.58
 BuildRequires:	automake
@@ -113,7 +114,8 @@ Wiązania Pythona do biblioteki opensync.
 [ -x "%{_bindir}/python%{py_ver}-config" ] && sed -i -e 's#python-config#%{_bindir}/python%{py_ver}-config#g' acinclude.m4
 
 # avoid errors on glib deprecation warnings
-%{__sed} -i -e 's#-Werror##g' opensync/Makefile.am osengine/Makefile.am tools/Makefile.am
+%{__sed} -i -e 's#-Werror##g' opensync/Makefile.am osengine/Makefile.am tools/Makefile.am \
+	formats/Makefile.am formats/vformats-xml/Makefile.am osplugin/Makefile.am wrapper/Makefile.am
 
 %build
 %{__libtoolize}
