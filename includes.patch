@@ -1,0 +1,10 @@
+--- libopensync-0.22/formats/vformats-xml/xmldoc.c.orig	2007-03-27 13:49:27.000000000 +0200
++++ libopensync-0.22/formats/vformats-xml/xmldoc.c	2025-02-01 23:58:33.275235120 +0100
+@@ -19,6 +19,7 @@
+  */
+ 
+ #include "xml-support.h"
++#include <stdlib.h>
+ 
+ static osync_bool from_xml(void *conv_data, char *input, int inpsize, char **output, int *outpsize, osync_bool *free_input, OSyncError **error)
+ {
